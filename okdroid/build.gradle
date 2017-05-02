@@ -1,8 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = "1.0.0"
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
+    resourcePrefix "okdroid"
 
     defaultConfig {
         minSdkVersion 14
@@ -31,4 +37,90 @@ dependencies {
     compile 'com.squareup.okio:okio:1.12.0'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
     compile 'com.google.code.gson:gson:2.8.0'
+}
+
+def siteUrl = 'https://github.com/hcs-xph/Okhttp-OkDroid'
+def gitUrl = 'https://github.com/hcs-xph/Okhttp-OkDroid.git'
+group "com.mph.okdroid"
+
+install{
+    repositories.mavenInstaller{
+        pom{
+            project{
+                packaging 'aar'
+                name 'Based on library network request okhttp encapsulation'
+                url siteUrl
+                // 设置许可证
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers{//开发者信息
+                    developer{
+                        id 'hechangsheng'
+                        name 'Aaron'
+                        email 'q2589162301@gmail.com'
+                    }
+                }
+                scm{
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+//生成sourcs.jar
+task sourcesJar(type: Jar){
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc){
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+//生成javadoc.jar
+task javadocJar(type:Jar, dependsOn: javadoc){
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+javadoc{
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title "OkDroid"
+    }
+}
+artifacts{
+    archives javadocJar
+    archives sourcesJar
+}
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+/**
+ * userOrg:为bintray帐号信息里面的Organization Id
+ * repo:为创建的仓库名称
+ * 如果以上没找到或者写错会报如下错：
+ * （Could not create package 'huangxuanheng/maven/fragmentstack':HTTP/1.1 404 Not Found [message:Repo 'maven' was not found]）
+ **/
+bintray{
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg{
+        userOrg="maverick"
+        repo = "mph"
+        name = "OkDroid" //发布到JCenter上的项目名字
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
 }
