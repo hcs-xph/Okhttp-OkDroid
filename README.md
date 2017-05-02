@@ -146,7 +146,7 @@ okDroid.cancel(this);
 
 ## **混淆**
 ```java
-#myokhttp
+#okdroid
 -dontwarn com.mph.okdroid.**
 -keep class com.mph.okdroid.**{*;}
 
