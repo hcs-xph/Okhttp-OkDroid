@@ -139,7 +139,7 @@ okDroid.download().url("http://ivy.pconline.com.cn/click?adid=434690&id=pc.xz.an
                 });
 
 ```
-**注意：**在以上示例中请求设置的tag都为this，所以取消请求方式为：
+**注意**：在以上示例中请求设置的tag都为this，所以取消请求方式为：
 ```java
 okDroid.cancel(this);
 ```
