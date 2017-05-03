@@ -27,7 +27,7 @@ public class PostActivity extends AppCompatActivity {
 
 
         //http://192.168.1.221:9190/api/agency/newGetAgency
-        okDroid.post().url("http://192.168.1.221:9190/api/agency/newGetAgency")
+        okDroid.post().url("请求地址")
                 .tag(this)
                 .addParam("type","1")
                 .enqueue(new JsonResHandler() {

@@ -65,7 +65,7 @@ public class UploadActivity extends AppCompatActivity {
         map.put("userid", "285");
         File file = new File("/sdcard/images/20170308_131947.jpg");
         name.setText("开始上传");
-        okDroid.upload().url("http://192.168.1.221:9190/api/casuserroleapi/editUserInfo")
+        okDroid.upload().url("请求地址")
                 .tag(UploadActivity.this)
                 .params(map)
                 .addFile("avatarByte", file)

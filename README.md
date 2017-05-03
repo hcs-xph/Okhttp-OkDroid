@@ -41,7 +41,7 @@ c.Raw 支持，回调传入RawResHandler
 ## **简单使用**
 **GET + RawResHandler**
 ```java
-okDroid.get().url("http://192.168.1.109:8080/day10/servlet/ListBookServlet")
+okDroid.get().url("请求地址")
                 .tag(this)
                 .enqueue(new RawResHandler() {
                     @Override
@@ -57,7 +57,7 @@ okDroid.get().url("http://192.168.1.109:8080/day10/servlet/ListBookServlet")
 ```
 **POST + JsonResHandler**
 ```java
-okDroid.post().url("http://192.168.1.221:9190/api/agency/newGetAgency")
+okDroid.post().url("请求地址")
                 .tag(this)
                 .addParam("type","1")
                 .enqueue(new JsonResHandler() {
@@ -89,7 +89,7 @@ Map<String, String> map = new HashMap<>();
         map.put("waist", "43");
         map.put("userid", "285");
         File file = new File("/sdcard/images/20170308_131947.jpg");
-        okDroid.upload().url("http://192.168.1.221:9190/api/casuserroleapi/editUserInfo")
+        okDroid.upload().url("请求地址")
                 .tag(UploadActivity.this)
                 .params(map)
                 .addFile("avatarByte", file)

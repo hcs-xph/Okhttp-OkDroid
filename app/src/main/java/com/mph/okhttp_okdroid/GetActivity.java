@@ -27,7 +27,7 @@ public class GetActivity extends AppCompatActivity {
 
         //http://192.168.1.109:8080/day10/servlet/ListBookServlet
 
-        okDroid.get().url("http://192.168.1.109:8080/day10/servlet/ListBookServlet")
+        okDroid.get().url("请求地址")
                 .tag(this)
                 .enqueue(new RawResHandler() {
                     @Override
